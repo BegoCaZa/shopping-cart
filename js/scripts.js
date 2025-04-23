@@ -102,6 +102,9 @@ const PRODUCTS = [
 
   //ELEMENTOS HTML
   const dessertContainerElement = document.getElementById('desserts-container');
+  const buttonsContainer = document.getElementById('filter-buttons');
+
+  
 
 //FUNCIONES
 
@@ -181,8 +184,17 @@ const createDessertCard = (dessert) => {
     return articleElement; //esto lo va a recibir mi contenedro en el foreach
 }
 
+  //copias del array
+  const filterDesserts = [...PRODUCTS];
+
+// filterDesserts.forEach(dessert => {
+//     const card = createDessertCard(dessert); //llamo a la funcion
+//     fragment.appendChild(card);//meto la card al contenedor
+//   }
+//   );
 
 const fragment = document.createDocumentFragment(); //creo un fragmento para no estar metiendo al contenedor cada vez que cree una card
+
   // Recorro el array de productos y creo una card por cada uno
 PRODUCTS.forEach(dessert => {
     const card = createDessertCard(dessert); //llamo a la funcion
@@ -190,3 +202,12 @@ PRODUCTS.forEach(dessert => {
   });
 
   dessertContainerElement.appendChild(fragment); //meto el fragmento al contenedor
+
+handleClick = (event) => {
+    const clickedButton = event.target;
+
+    console.log(clickedButton);
+}
+
+//eventos
+buttonsContainer.addEventListener('click', handleClick);
