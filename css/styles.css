@@ -124,7 +124,7 @@ body {
 .product-image{
   width: 100%;;
   border-radius: var(--borderRadius-card);
-  padding-bottom: 20px;
+  margin-bottom: 20px;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
