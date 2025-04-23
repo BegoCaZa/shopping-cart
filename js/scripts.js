@@ -152,17 +152,41 @@ const createDessertCard = (dessert) => {
     button.appendChild(buttonText);
 
     //textos
+    const textContainer = document.createElement('div');
+    textContainer.classList.add('card-text-container');
+  
+    const subtitle = document.createElement('span');
+    subtitle.classList.add('product-subtitle');
+    subtitle.textContent = dessert.name;
+  
+    const title = document.createElement('span');
+    title.classList.add('product-title');
+    title.textContent = dessert.title;
+  
+    const price = document.createElement('span');
+    price.classList.add('product-price');
+    price.textContent = `$${dessert.price}`;
+
+    textContainer.appendChild(subtitle);
+    textContainer.appendChild(title);
+    textContainer.appendChild(price);
+
 
     //meter al article
     articleElement.appendChild(pictureElement);
     articleElement.appendChild(button);
+    articleElement.appendChild(textContainer);
 
 
     return articleElement; //esto lo va a recibir mi contenedro en el foreach
 }
 
-// Renderizar cards
+
+const fragment = document.createDocumentFragment(); //creo un fragmento para no estar metiendo al contenedor cada vez que cree una card
+  // Recorro el array de productos y creo una card por cada uno
 PRODUCTS.forEach(dessert => {
     const card = createDessertCard(dessert); //llamo a la funcion
-    dessertContainerElement.appendChild(card);//meto la card al contenedor
+    fragment.appendChild(card);//meto la card al contenedor
   });
+
+  dessertContainerElement.appendChild(fragment); //meto el fragmento al contenedor
