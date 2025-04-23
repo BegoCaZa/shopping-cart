@@ -21,14 +21,22 @@
 
     <main>
       <section class="desserts-container">
-        <article>
+        <article class="card">
           <picture>
             <source media="(min-width:1440px)" srcset="assets/images/image-waffle-desktop.jpg">
             <source media="(min-width:760px)" srcset="assets/images/image-waffle-tablet.jpg">
             <source media="(min-width:360px)" srcset="assets/images/image-waffle-mobile.jpg">
-            <img src="assets/images/image-waffle-mobile.jpg" alt="waffle image">
+            <img class="product-image product-selected"  src="assets/images/image-waffle-mobile.jpg" alt="waffle image">
           </picture>
-          <button></button>
+          <button class="button-add-to-cart">
+            <img class="icon" src="./assets/images/icon-add-to-cart.svg" alt="cart icon">
+            <span>Add to cart</span>
+          </button>
+          <div class="card-text-container">
+          <span class="product-subtitle">Waffle</span>
+          <span class="product-title">Waffle with Berries</span>
+          <span class="product-price">$20.00</span>
+        </div>
         </article>
 
       </section>

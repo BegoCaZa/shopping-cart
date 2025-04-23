@@ -1,8 +1,24 @@
 :root{
-  --color-orange: #C73B0F;
-  --color-ocre: #AD8A85;
-  --color-white: #FFF;
-  --color-black: #000000;
+  
+  --color-primary: #C73B0F;
+  --color-outline: #AD8A85;
+  --color-accent: #ffeadb;
+  --color-text: #260F08;
+  --color-subtitle: #8c6e5a;
+  --color-bg: #FCF8F6;
+
+  --borderRadius-button:20px;
+  --borderRadius-card: 10px;
+
+  /* TYPOGRAPHY */
+  --title-size: 40px;
+  --title-style: 700;
+  --button-subtitle-size: 14px;
+  --button-subtitle-style: 500;
+  --card-title-size: 18px;
+  --card-title-style: 600;
+  --card-subtitle-size: 16px;
+  --card-subtitle-style: 300;
 }
 
 * {
@@ -32,4 +48,141 @@ nav ul {
 body {
   margin: 0;
   font-family: "Red Hat Text";
+  color: var(--color-text);
+  display: flex;
+  flex-direction: column;
+}
+
+.header{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  /* padding-top: 50px;
+  padding-left: 20px; */
+  width: 90%;
+  margin: 50px 20px 20px 20px;
+  
+}
+
+.header-title{
+  font-size: var(--title-size);
+  font-weight: var(--title-style);
+  text-align: flex-start;
+  padding-bottom: 20px;
+}
+
+.buttons {
+  display: flex;
+  flex-direction: row;
+  gap: 16px;
+}
+
+.button {
+  border: 1.5px solid var(--color-outline);
+  border-radius: var(--borderRadius-button);
+  background: none;
+  padding: 8px 20px;
+  font-weight: var(--button-subtitle-style);
+  cursor: pointer;
+  color: var(--color-text);
+  
+}
+
+
+.button.active {
+  background-color: var(--color-primary);
+  color: white;
+}
+
+/* Cards */
+
+.desserts-container {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  align-items: center;
+  
+}
+
+.card{
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: transparent;
+  border-radius: var(--borderRadius-card);
+  /* padding: 16px; */
+  width: 88%;
+}
+
+.product-selected{
+  border: 2px solid var(--color-primary);
+}
+
+.product-image{
+  width: 100%;;
+  border-radius: var(--borderRadius-card);
+  padding-bottom: 20px;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+.button-add-to-cart{
+  position: absolute;
+  content: "";
+  top: 200px;
+  border: 1.5px solid var(--color-outline);
+  border-radius: var(--borderRadius-button);
+  background-color: white;
+  padding: 8px 20px;
+  font-weight: var(--button-subtitle-style);
+  font-size: var(--button-subtitle-size);
+  cursor: pointer;
+  color: var(--color-text);
+
+  width: 160px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+}
+
+.icon{
+  width: 20px;
+  height: 20px;
+}
+
+.card-text-container{
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 3px;
+  text-align: left;
+  width: 100%;
+
+}
+.product-subtitle{
+  font-size: var(--card-subtitle-size);
+  font-weight: var(--card-subtitle-style);
+  color: var(--color-subtitle);
+ 
+  
+}
+.product-title{
+  font-size: var(--card-title-size);
+  font-weight: var(--card-title-style);
+  color: var(--color-text);
+  
+  
+}
+.product-price{
+  font-size: var(--card-subtitle-size);
+  font-weight: var(--card-subtitle-style);
+  color: var(--color-primary);
+  
+  
 }
