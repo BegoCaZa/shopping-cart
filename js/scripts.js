@@ -205,6 +205,21 @@ PRODUCTS.forEach(dessert => {
 
 handleClick = (event) => {
     const clickedButton = event.target;
+    buttonsContainer.children.forEach((button) => {
+        button.classList.remove('active');
+    }); //que empiecen todos en false
+
+    clickedButton.classList.add('active'); //agrego la clase active al boton que se clickeo
+
+    if(clickedButton.dataset.filter==='default'){
+    } //imprimo el primer array
+    else if(clickedButton.dataset.filter==='cakes'){
+        filterDesserts.filter((dessert) => dessert.name === 'Cake');
+    } 
+    else if(clickedButton.dataset.filter==='pastries'){
+        filterDesserts.filter((dessert) => dessert.name === 'Pastry');
+    } 
+
 
     console.log(clickedButton);
 }
