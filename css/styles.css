@@ -1,3 +1,10 @@
+:root{
+  --color-orange: #C73B0F;
+  --color-ocre: #AD8A85;
+  --color-white: #FFF;
+  --color-black: #000000;
+}
+
 * {
   box-sizing: border-box;
 }
@@ -24,5 +31,5 @@ nav ul {
 
 body {
   margin: 0;
-  font-family: sans-serif;
+  font-family: "Red Hat Text";
 }
