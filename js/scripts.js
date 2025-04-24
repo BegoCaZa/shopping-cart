@@ -104,6 +104,8 @@ const PRODUCTS = [
 const dessertContainerElement = document.getElementById('desserts-container');
 const buttonsContainer = document.getElementById('filter-buttons');
 
+//VARIABLES
+
 //FUNCIONES
 
 const activateButton = (button, buttonActive) => {
@@ -114,6 +116,14 @@ const activateButton = (button, buttonActive) => {
 const disableButton = (button, buttonActive) => {
   button.classList.remove('hide');
   buttonActive.classList.add('hide');
+};
+
+const addToCart = (event, buttonPlus, desserts) => {
+  let quantity = 0;
+
+  buttonPlus = event.target;
+  desserts.push({ ...PRODUCTS, quantity: quantity++ }); //esta es la copia del array
+  console.log(desserts[quantity]);
 };
 
 const createDessertCard = dessert => {
@@ -175,6 +185,7 @@ const createDessertCard = dessert => {
 
   const buttonTextActive = document.createElement('span');
   buttonTextActive.textContent = '1'; //aqui le voy a poner el valor de la cantidad
+  buttonTextActive.value = 1; //aqui le voy a poner el valor de la cantidad
 
   const buttonReduce = document.createElement('button');
   buttonReduce.classList.add('button-add-reduce');
@@ -197,8 +208,11 @@ const createDessertCard = dessert => {
   button.addEventListener('click', event =>
     activateButton(button, buttonActive)
   ); //tiene que recibir el evento, y los botones para detectarlos
-  buttonActive.addEventListener('click', event =>
+  buttonReduce.addEventListener('click', event =>
     disableButton(button, buttonActive)
+  );
+  buttonPlus.addEventListener('click', event =>
+    addToCart(event, buttonPlus, PRODUCTS)
   );
 
   //textos
