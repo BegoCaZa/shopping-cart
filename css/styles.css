@@ -145,9 +145,45 @@ body {
   gap: 8px;
 }
 
+.button-add-to-cart-active {
+  position: absolute;
+  content: '';
+  bottom: 80px;
+  border: 1.5px solid var(--color-outline);
+  border-radius: var(--borderRadius-button);
+  background-color: var(--color-primary);
+  padding: 8px 20px;
+  font-weight: var(--button-subtitle-style);
+  font-size: var(--button-subtitle-size);
+  cursor: pointer;
+  color: white;
+  width: 160px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+}
+
 .icon {
   width: 20px;
   height: 20px;
+}
+
+.button-add-reduce {
+  border: 1px solid white;
+  border-radius: 50%;
+  background-color: transparent;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  padding: 4px;
+}
+
+.icon-add-reduce {
+  width: 12px;
+  height: 12px;
 }
 
 .card-text-container {
@@ -173,4 +209,8 @@ body {
   font-size: var(--card-subtitle-size);
   font-weight: var(--card-subtitle-style);
   color: var(--color-primary);
+}
+
+.hide {
+  display: none;
 }

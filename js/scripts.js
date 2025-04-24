@@ -149,8 +149,40 @@ const createDessertCard = dessert => {
   const buttonText = document.createElement('span');
   buttonText.textContent = 'Add to cart';
 
+  //boton activo
+
+  const buttonActive = document.createElement('div');
+  buttonActive.classList.add('button-add-to-cart-active');
+  buttonActive.classList.add('hide');
+
+  const buttonPlus = document.createElement('button');
+  buttonPlus.classList.add('button-add-reduce');
+
+  const iconPlus = document.createElement('img');
+  iconPlus.classList.add('icon-add-reduce');
+  iconPlus.srcset = 'assets/images/icon-increment-quantity.svg';
+  iconPlus.alt = 'plus icon';
+
+  const buttonTextActive = document.createElement('span');
+  buttonTextActive.textContent = '1'; //aqui le voy a poner el valor de la cantidad
+
+  const buttonReduce = document.createElement('button');
+  buttonReduce.classList.add('button-add-reduce');
+
+  const iconReduce = document.createElement('img');
+  iconReduce.classList.add('icon-add-reduce');
+  iconReduce.srcset = 'assets/images/icon-decrement-quantity.svg';
+  iconReduce.alt = 'reduce icon';
+
   button.appendChild(icon);
   button.appendChild(buttonText);
+
+  buttonPlus.appendChild(iconPlus);
+  buttonReduce.appendChild(iconReduce);
+
+  buttonActive.appendChild(buttonPlus);
+  buttonActive.appendChild(buttonTextActive);
+  buttonActive.appendChild(buttonReduce);
 
   //textos
   const textContainer = document.createElement('div');
@@ -175,6 +207,7 @@ const createDessertCard = dessert => {
   //meter al article
   articleElement.appendChild(pictureElement);
   articleElement.appendChild(button);
+  articleElement.appendChild(buttonActive);
   articleElement.appendChild(textContainer);
 
   return articleElement; //esto lo va a recibir mi contenedro en el foreach
