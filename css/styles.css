@@ -132,7 +132,7 @@ body {
 .button-add-to-cart{
   position: absolute;
   content: "";
-  top: 180px;
+  bottom: 80px;
   border: 1.5px solid var(--color-outline);
   border-radius: var(--borderRadius-button);
   background-color: white;

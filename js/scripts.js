@@ -117,21 +117,22 @@ const createDessertCard = (dessert) => {
     const pictureElement = document.createElement('picture'); //aqui metere los source y el img
 
     const sourceElementMobile= document.createElement('source');
-    sourceElementMobile.setAttribute('media', '(max-width: 360px)');
-    sourceElementMobile.setAttribute('srcset', dessert.imgMobile);
+    sourceElementMobile.media = '(max-width: 360px)';
+    sourceElementMobile.srcset = dessert.imgMobile;
+    
 
     const sourceElementTablet = document.createElement('source');
-    sourceElementTablet.setAttribute('media', '(max-width: 760px)');
-    sourceElementTablet.setAttribute('srcset', dessert.imgTablet);
+    sourceElementTablet.media = '(max-width: 760px)';
+    sourceElementTablet.srcset = dessert.imgTablet;
     
     const sourceElementDesktop = document.createElement('source');
-    sourceElementDesktop.setAttribute('media', '(min-width: 1440px)');
-    sourceElementDesktop.setAttribute('srcset', dessert.imgDesktop);
+    sourceElementDesktop.media = '(min-width: 1440px)';
+    sourceElementDesktop.srcset = dessert.imgDesktop;
 
     const imgElement = document.createElement('img');
     imgElement.classList.add('product-image');
-    imgElement.setAttribute('src', dessert.imgMobile);
-    imgElement.setAttribute('alt', dessert.alt);
+    imgElement.srcset = dessert.imgMobile;
+    imgElement.alt = dessert.alt;
 
     //meto todo
     pictureElement.appendChild(sourceElementMobile);
@@ -145,8 +146,8 @@ const createDessertCard = (dessert) => {
 
     const icon = document.createElement('img');
     icon.classList.add('icon');
-    icon.setAttribute('src', './assets/images/icon-add-to-cart.svg');
-    icon.setAttribute('alt', 'cart icon');
+    icon.srcset = './assets/images/icon-add-to-cart.svg';
+    icon.alt = 'cart icon';
 
     const buttonText = document.createElement('span');
     buttonText.textContent = 'Add to cart';
@@ -183,16 +184,7 @@ const createDessertCard = (dessert) => {
 
     return articleElement; //esto lo va a recibir mi contenedro en el foreach
 }
-
-  //copias del array
-  const filterDesserts = [...PRODUCTS];
-
-// filterDesserts.forEach(dessert => {
-//     const card = createDessertCard(dessert); //llamo a la funcion
-//     fragment.appendChild(card);//meto la card al contenedor
-//   }
-//   );
-
+const printDesserts = () => {
 const fragment = document.createDocumentFragment(); //creo un fragmento para no estar metiendo al contenedor cada vez que cree una card
 
   // Recorro el array de productos y creo una card por cada uno
@@ -202,27 +194,38 @@ PRODUCTS.forEach(dessert => {
   });
 
   dessertContainerElement.appendChild(fragment); //meto el fragmento al contenedor
+}
 
-handleClick = (event) => {
+const sortDesserts = (filter) => {
+
+}
+
+changeFilter = (event) => {
     const clickedButton = event.target;
-    buttonsContainer.children.forEach((button) => {
+    [...buttonsContainer.children].forEach((button) => {
         button.classList.remove('active');
     }); //que empiecen todos en false
 
     clickedButton.classList.add('active'); //agrego la clase active al boton que se clickeo
 
+    //sort
+    const filterDesserts = [...PRODUCTS];
+    
     if(clickedButton.dataset.filter==='default'){
+
+        printDesserts(); //imprimo el primer array
+
     } //imprimo el primer array
     else if(clickedButton.dataset.filter==='cakes'){
-        filterDesserts.filter((dessert) => dessert.name === 'Cake');
+        filterDesserts.sort
     } 
     else if(clickedButton.dataset.filter==='pastries'){
         filterDesserts.filter((dessert) => dessert.name === 'Pastry');
     } 
 
-
-    console.log(clickedButton);
 }
 
+printDesserts();
+
 //eventos
-buttonsContainer.addEventListener('click', handleClick);
+buttonsContainer.addEventListener('click', changeFilter);
