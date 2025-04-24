@@ -1,13 +1,12 @@
-:root{
-  
-  --color-primary: #C73B0F;
-  --color-outline: #AD8A85;
+:root {
+  --color-primary: #c73b0f;
+  --color-outline: #ad8a85;
   --color-accent: #ffeadb;
-  --color-text: #260F08;
+  --color-text: #260f08;
   --color-subtitle: #8c6e5a;
-  --color-bg: #FCF8F6;
+  --color-bg: #fcf8f6;
 
-  --borderRadius-button:20px;
+  --borderRadius-button: 20px;
   --borderRadius-card: 10px;
 
   /* TYPOGRAPHY */
@@ -47,13 +46,13 @@ nav ul {
 
 body {
   margin: 0;
-  font-family: "Red Hat Text";
+  font-family: 'Red Hat Text';
   color: var(--color-text);
   display: flex;
   flex-direction: column;
 }
 
-.header{
+.header {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -62,10 +61,9 @@ body {
   padding-left: 20px; */
   width: 90%;
   margin: 50px 20px 20px 20px;
-  
 }
 
-.header-title{
+.header-title {
   font-size: var(--title-size);
   font-weight: var(--title-style);
   text-align: flex-start;
@@ -86,9 +84,7 @@ body {
   font-weight: var(--button-subtitle-style);
   cursor: pointer;
   color: var(--color-text);
-  
 }
-
 
 .button.active {
   background-color: var(--color-primary);
@@ -102,10 +98,9 @@ body {
   flex-direction: column;
   gap: 24px;
   align-items: center;
-  
 }
 
-.card{
+.card {
   position: relative;
   display: flex;
   flex-direction: column;
@@ -117,11 +112,11 @@ body {
   width: 88%;
 }
 
-.product-selected{
+.product-selected {
   border: 2px solid var(--color-primary);
 }
 
-.product-image{
+.product-image {
   width: 100%;
   border-radius: var(--borderRadius-card);
   margin-bottom: 20px;
@@ -129,9 +124,9 @@ body {
   background-position: center;
   background-repeat: no-repeat;
 }
-.button-add-to-cart{
+.button-add-to-cart {
   position: absolute;
-  content: "";
+  content: '';
   bottom: 80px;
   border: 1.5px solid var(--color-outline);
   border-radius: var(--borderRadius-button);
@@ -150,12 +145,12 @@ body {
   gap: 8px;
 }
 
-.icon{
+.icon {
   width: 20px;
   height: 20px;
 }
 
-.card-text-container{
+.card-text-container {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -163,26 +158,19 @@ body {
   gap: 3px;
   text-align: left;
   width: 100%;
-
 }
-.product-subtitle{
+.product-subtitle {
   font-size: var(--card-subtitle-size);
   font-weight: var(--card-subtitle-style);
   color: var(--color-subtitle);
- 
-  
 }
-.product-title{
+.product-title {
   font-size: var(--card-title-size);
   font-weight: var(--card-title-style);
   color: var(--color-text);
-  
-  
 }
-.product-price{
+.product-price {
   font-size: var(--card-subtitle-size);
   font-weight: var(--card-subtitle-style);
   color: var(--color-primary);
-  
-  
 }
