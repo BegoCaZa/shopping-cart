@@ -119,8 +119,6 @@ const disableButton = (button, buttonActive) => {
 };
 
 const addToCart = (event, buttonPlus, desserts) => {
-  let quantity = 0;
-
   buttonPlus = event.target;
   desserts.push({ ...PRODUCTS, quantity: quantity++ }); //esta es la copia del array
   console.log(desserts[quantity]);
@@ -129,6 +127,7 @@ const addToCart = (event, buttonPlus, desserts) => {
 const createDessertCard = dessert => {
   const articleElement = document.createElement('article');
   articleElement.classList.add('card');
+  articleElement.dataset.id = dessert.id; // Agrega el ID del producto al dataset
 
   //imagenes
 
