@@ -217,6 +217,11 @@ body {
 .icon {
   width: 20px;
   height: 20px;
+  pointer-events: none;
+}
+
+.add-to-cart-button {
+  pointer-events: none;
 }
 
 .button-add-reduce {

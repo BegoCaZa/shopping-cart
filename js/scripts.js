@@ -105,23 +105,30 @@ const dessertContainerElement = document.getElementById('desserts-container');
 const buttonsContainer = document.getElementById('filter-buttons');
 
 //VARIABLES
+let cart = [];
 
 //FUNCIONES
-
-const activateButton = (button, buttonActive) => {
-  button.classList.add('hide');
-  buttonActive.classList.remove('hide');
-};
-
-const disableButton = (button, buttonActive) => {
-  button.classList.remove('hide');
+const removeFromCart = buttonAddToCart => {
+  buttonAddToCart.classList.remove('hide');
   buttonActive.classList.add('hide');
 };
+const incrementQuantity = () => {};
 
-const addToCart = (event, buttonPlus, desserts) => {
-  buttonPlus = event.target;
-  desserts.push({ ...PRODUCTS, quantity: quantity++ }); //esta es la copia del array
-  console.log(desserts[quantity]);
+const decrementQuantity = () => {};
+
+const addToCart = (dessert, buttonAddToCart, buttonActive) => {
+  const exist = cart.some(item => item.id === dessert.id); //si el id del dessert es el mismo que el item, existe en el carrito
+
+  if (!exist) {
+    //si no existe, continua
+    cart.push({ ...dessert, quantity: 1 });
+
+    buttonAddToCart.classList.add('hide');
+    buttonActive.classList.remove('hide');
+  }
+
+  console.log(cart);
+  console.log(buttonAddToCart);
 };
 
 const createDessertCard = dessert => {
@@ -157,8 +164,8 @@ const createDessertCard = dessert => {
   pictureElement.appendChild(imgElement);
 
   //botones
-  const button = document.createElement('button');
-  button.classList.add('button-add-to-cart');
+  const buttonAddToCart = document.createElement('button');
+  buttonAddToCart.classList.add('button-add-to-cart');
 
   const icon = document.createElement('img');
   icon.classList.add('icon');
@@ -166,6 +173,7 @@ const createDessertCard = dessert => {
   icon.alt = 'cart icon';
 
   const buttonText = document.createElement('span');
+  buttonText.classList.add('add-to-cart-button');
   buttonText.textContent = 'Add to cart';
 
   //boton activo
@@ -194,8 +202,8 @@ const createDessertCard = dessert => {
   iconReduce.srcset = 'assets/images/icon-decrement-quantity.svg';
   iconReduce.alt = 'reduce icon';
 
-  button.appendChild(icon);
-  button.appendChild(buttonText);
+  buttonAddToCart.appendChild(icon);
+  buttonAddToCart.appendChild(buttonText);
 
   buttonPlus.appendChild(iconPlus);
   buttonReduce.appendChild(iconReduce);
@@ -204,16 +212,16 @@ const createDessertCard = dessert => {
   buttonActive.appendChild(buttonTextActive);
   buttonActive.appendChild(buttonReduce);
 
-  button.addEventListener(
+  buttonAddToCart.addEventListener(
     'click',
-    event => activateButton(button, buttonActive) //si agrego event no sirve
+    event => addToCart(dessert, event.target, buttonActive) //si agrego event no sirve
   ); //tiene que recibir el evento, y los botones para detectarlos
-  buttonReduce.addEventListener('click', event =>
-    disableButton(button, buttonActive)
-  );
-  buttonPlus.addEventListener('click', event =>
-    addToCart(buttonPlus, PRODUCTS)
-  );
+  // buttonReduce.addEventListener('click', event =>
+  //   disableButton(button, buttonActive)
+  // );
+  // buttonPlus.addEventListener('click', event =>
+  //   addToCart(buttonPlus, PRODUCTS)
+  // );
 
   //textos
   const textContainer = document.createElement('div');
@@ -237,7 +245,7 @@ const createDessertCard = dessert => {
 
   //meter al article
   articleElement.appendChild(pictureElement);
-  articleElement.appendChild(button);
+  articleElement.appendChild(buttonAddToCart);
   articleElement.appendChild(buttonActive);
   articleElement.appendChild(textContainer);
 
