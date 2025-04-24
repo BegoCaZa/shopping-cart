@@ -54,9 +54,15 @@ body {
   flex-direction: column;
 }
 
-/* @media (min-width: 760px) {
+@media (min-width: 760px) {
   body {
-    justify-content: center;
+    align-items: center;
+  }
+}
+/* @media (min-width: 1440px) {
+  body {
+    justify-items: center;
+    align-content: center;
   }
 } */
 
@@ -69,6 +75,12 @@ body {
   padding-left: 20px; */
   width: 90%;
   margin: 50px 20px 20px 20px;
+}
+@media (min-width: 760px) {
+  .header {
+    width: 86%;
+    margin-inline: auto;
+  }
 }
 
 .header-title {
@@ -101,6 +113,16 @@ body {
 
 /* Cards */
 
+@media (min-width: 1440px) {
+  .main {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    width: 92%;
+    gap: 15px;
+  }
+}
+
 .desserts-container {
   display: grid;
   grid-template-columns: 1fr;
@@ -111,17 +133,19 @@ body {
 
 @media (min-width: 760px) {
   .desserts-container {
+    width: 90%;
     grid-template-columns: repeat(3, 1fr);
-    gap: 10px;
+    row-gap: 20px;
     justify-items: center;
+    margin-inline: auto;
   }
 }
 
 @media (min-width: 1440px) {
   .desserts-container {
     grid-template-columns: repeat(3, 1fr);
-    column-gap: 10px;
-    justify-items: center;
+    column-gap: 5px;
+    /* justify-items: center; */
   }
 }
 
@@ -248,13 +272,19 @@ body {
   margin: 32px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   gap: 10px;
 }
 @media (min-width: 760px) {
   .shopping-cart {
     margin-inline: auto;
+  }
+}
+@media (min-width: 1440px) {
+  .shopping-cart {
+    width: 380px;
+    margin: 0;
   }
 }
 
@@ -265,11 +295,4 @@ body {
   font-size: var(--cart-title-size);
   font-weight: bold;
   color: var(--color-primary);
-}
-
-@media (min-width: 1440px) {
-  .main {
-    display: flex;
-    flex-direction: row;
-  }
 }
