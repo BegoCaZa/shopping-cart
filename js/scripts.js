@@ -204,14 +204,15 @@ const createDessertCard = dessert => {
   buttonActive.appendChild(buttonTextActive);
   buttonActive.appendChild(buttonReduce);
 
-  button.addEventListener('click', event =>
-    activateButton(button, buttonActive)
+  button.addEventListener(
+    'click',
+    event => activateButton(button, buttonActive) //si agrego event no sirve
   ); //tiene que recibir el evento, y los botones para detectarlos
   buttonReduce.addEventListener('click', event =>
     disableButton(button, buttonActive)
   );
   buttonPlus.addEventListener('click', event =>
-    addToCart(event, buttonPlus, PRODUCTS)
+    addToCart(buttonPlus, PRODUCTS)
   );
 
   //textos
