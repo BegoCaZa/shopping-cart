@@ -106,6 +106,16 @@ const buttonsContainer = document.getElementById('filter-buttons');
 
 //FUNCIONES
 
+const activateButton = (button, buttonActive) => {
+  button.classList.add('hide');
+  buttonActive.classList.remove('hide');
+};
+
+const disableButton = (button, buttonActive) => {
+  button.classList.remove('hide');
+  buttonActive.classList.add('hide');
+};
+
 const createDessertCard = dessert => {
   const articleElement = document.createElement('article');
   articleElement.classList.add('card');
@@ -183,6 +193,13 @@ const createDessertCard = dessert => {
   buttonActive.appendChild(buttonPlus);
   buttonActive.appendChild(buttonTextActive);
   buttonActive.appendChild(buttonReduce);
+
+  button.addEventListener('click', event =>
+    activateButton(button, buttonActive)
+  ); //tiene que recibir el evento, y los botones para detectarlos
+  buttonActive.addEventListener('click', event =>
+    disableButton(button, buttonActive)
+  );
 
   //textos
   const textContainer = document.createElement('div');
