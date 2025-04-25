@@ -106,15 +106,40 @@ const buttonsContainer = document.getElementById('filter-buttons');
 
 //VARIABLES
 let cart = [];
+let quantity = 0;
 
 //FUNCIONES
 const removeFromCart = buttonAddToCart => {
   buttonAddToCart.classList.remove('hide');
   buttonActive.classList.add('hide');
 };
-const incrementQuantity = () => {};
+const incrementQuantity = dessert => {
+  const existingDessert = defineIfDessertExists(dessert);
 
-const decrementQuantity = () => {};
+  if (existingDessert) {
+    existingDessert.quantity += 1; // Incrementa la cantidad
+    const articleCard = document.getElementById(dessert.id);
+    const quantityTextActive = articleCard.children[2].children[1]; // Accede al span de cantidad dentro del botón activo
+    if (quantityTextActive) {
+      quantityTextActive.textContent = existingDessert.quantity; // Actualiza el texto del botón activo
+    }
+  }
+
+  console.log(cart);
+};
+
+const decrementQuantity = dessert => {
+  const existingDessert = defineIfDessertExists(dessert);
+
+  if (existingDessert) {
+    existingDessert.quantity -= 1; // Incrementa la cantidad
+    const articleCard = document.getElementById(dessert.id);
+    const quantityTextActive = articleCard.children[2].children[1]; // Accede al span de cantidad dentro del botón activo
+    if (quantityTextActive) {
+      quantityTextActive.textContent = existingDessert.quantity; // Actualiza el texto del botón activo
+    }
+  }
+};
 
 const addToCart = (dessert, buttonAddToCart, buttonActive) => {
   const exist = cart.some(item => item.id === dessert.id); //si el id del dessert es el mismo que el item, existe en el carrito
@@ -127,14 +152,19 @@ const addToCart = (dessert, buttonAddToCart, buttonActive) => {
     buttonActive.classList.remove('hide');
   }
 
-  console.log(cart);
-  console.log(buttonAddToCart);
+  // console.log(cart);
+  // console.log(buttonAddToCart);
+};
+
+const defineIfDessertExists = dessert => {
+  const existingDessert = cart.find(item => item.id === dessert.id); // Busca el producto en el carrito
+  return existingDessert;
 };
 
 const createDessertCard = dessert => {
   const articleElement = document.createElement('article');
   articleElement.classList.add('card');
-  articleElement.dataset.id = dessert.id; // Agrega el ID del producto al dataset
+  articleElement.id = dessert.id; // Agrega el ID del producto al dataset
 
   //imagenes
 
@@ -165,6 +195,7 @@ const createDessertCard = dessert => {
 
   //botones
   const buttonAddToCart = document.createElement('button');
+
   buttonAddToCart.classList.add('button-add-to-cart');
 
   const icon = document.createElement('img');
@@ -182,6 +213,13 @@ const createDessertCard = dessert => {
   buttonActive.classList.add('button-add-to-cart-active');
   buttonActive.classList.add('hide');
 
+  //condicion de ocultar cuando ya existe en el carrito
+  const productExists = defineIfDessertExists(dessert);
+  if (productExists) {
+    buttonAddToCart.classList.add('hide');
+    buttonActive.classList.remove('hide');
+  }
+
   const buttonPlus = document.createElement('button');
   buttonPlus.classList.add('button-add-reduce');
 
@@ -190,9 +228,12 @@ const createDessertCard = dessert => {
   iconPlus.srcset = 'assets/images/icon-increment-quantity.svg';
   iconPlus.alt = 'plus icon';
 
-  const buttonTextActive = document.createElement('span');
-  buttonTextActive.textContent = '1'; //aqui le voy a poner el valor de la cantidad
-  buttonTextActive.value = 1; //aqui le voy a poner el valor de la cantidad
+  const quantityTextActive = document.createElement('span');
+  if (productExists) {
+    quantityTextActive.textContent = `${productExists.quantity}`; //aqui le voy a poner el valor de la cantidad
+  } else {
+    quantityTextActive.textContent = 1; //aqui le voy a poner el valor de la cantidad
+  }
 
   const buttonReduce = document.createElement('button');
   buttonReduce.classList.add('button-add-reduce');
@@ -202,26 +243,22 @@ const createDessertCard = dessert => {
   iconReduce.srcset = 'assets/images/icon-decrement-quantity.svg';
   iconReduce.alt = 'reduce icon';
 
-  buttonAddToCart.appendChild(icon);
-  buttonAddToCart.appendChild(buttonText);
+  buttonAddToCart.append(icon);
+  buttonAddToCart.append(buttonText);
 
-  buttonPlus.appendChild(iconPlus);
-  buttonReduce.appendChild(iconReduce);
+  buttonPlus.append(iconPlus);
+  buttonReduce.append(iconReduce);
 
-  buttonActive.appendChild(buttonPlus);
-  buttonActive.appendChild(buttonTextActive);
-  buttonActive.appendChild(buttonReduce);
+  buttonActive.append(buttonReduce);
+  buttonActive.append(quantityTextActive);
+  buttonActive.append(buttonPlus);
 
   buttonAddToCart.addEventListener(
     'click',
     event => addToCart(dessert, event.target, buttonActive) //si agrego event no sirve
   ); //tiene que recibir el evento, y los botones para detectarlos
-  // buttonReduce.addEventListener('click', event =>
-  //   disableButton(button, buttonActive)
-  // );
-  // buttonPlus.addEventListener('click', event =>
-  //   addToCart(buttonPlus, PRODUCTS)
-  // );
+  buttonPlus.addEventListener('click', event => incrementQuantity(dessert));
+  buttonReduce.addEventListener('click', event => decrementQuantity(dessert));
 
   //textos
   const textContainer = document.createElement('div');
@@ -237,19 +274,19 @@ const createDessertCard = dessert => {
 
   const price = document.createElement('span');
   price.classList.add('product-price');
-  price.textContent = `$${dessert.price}`;
+  price.textContent = `$${dessert.price.toFixed(2)}`;
 
-  textContainer.appendChild(subtitle);
-  textContainer.appendChild(title);
-  textContainer.appendChild(price);
+  textContainer.append(subtitle);
+  textContainer.append(title);
+  textContainer.append(price);
 
   //meter al article
-  articleElement.appendChild(pictureElement);
-  articleElement.appendChild(buttonAddToCart);
-  articleElement.appendChild(buttonActive);
-  articleElement.appendChild(textContainer);
+  articleElement.append(pictureElement);
+  articleElement.append(buttonAddToCart);
+  articleElement.append(buttonActive);
+  articleElement.append(textContainer);
 
-  return articleElement; //esto lo va a recibir mi contenedro en el foreach
+  return articleElement; //esto lo va a recibir mi contenedor en el foreach
 };
 const printDesserts = products => {
   dessertContainerElement.textContent = '';
