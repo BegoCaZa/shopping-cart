@@ -109,10 +109,7 @@ let cart = [];
 let quantity = 0;
 
 //FUNCIONES
-const removeFromCart = buttonAddToCart => {
-  buttonAddToCart.classList.remove('hide');
-  buttonActive.classList.add('hide');
-};
+
 const incrementQuantity = dessert => {
   const existingDessert = defineIfDessertExists(dessert);
 
@@ -132,13 +129,31 @@ const decrementQuantity = dessert => {
   const existingDessert = defineIfDessertExists(dessert);
 
   if (existingDessert) {
-    existingDessert.quantity -= 1; // Incrementa la cantidad
+    existingDessert.quantity -= 1; // resta la cantidad
+
     const articleCard = document.getElementById(dessert.id);
     const quantityTextActive = articleCard.children[2].children[1]; // Accede al span de cantidad dentro del botón activo
     if (quantityTextActive) {
       quantityTextActive.textContent = existingDessert.quantity; // Actualiza el texto del botón activo
     }
   }
+  if (existingDessert.quantity <= 0) {
+    removeFromCart(dessert);
+  }
+  console.log(cart);
+};
+
+const removeFromCart = dessert => {
+  //le tengo que indicar cual es cada boton porque hasta ahora en esta funcion no existian
+  const articleCard = document.getElementById(dessert.id);
+  const buttonAddToCart = articleCard.children[1];
+  const buttonActive = articleCard.children[2];
+
+  //Elimina del carrito
+  cart = cart.filter(item => item.id !== dessert.id);
+
+  buttonAddToCart.classList.remove('hide');
+  buttonActive.classList.add('hide');
 };
 
 const addToCart = (dessert, buttonAddToCart, buttonActive) => {
