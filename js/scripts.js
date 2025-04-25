@@ -163,6 +163,13 @@ const addToCart = (dessert, buttonAddToCart, buttonActive) => {
     //si no existe, continua
     cart.push({ ...dessert, quantity: 1 });
 
+    // voy a reiniciar el contador cada que agregue un producto
+    const articleCard = document.getElementById(dessert.id);
+    const quantityTextActive = articleCard.children[2].children[1];
+    if (quantityTextActive) {
+      quantityTextActive.textContent = 1;
+    }
+
     buttonAddToCart.classList.add('hide');
     buttonActive.classList.remove('hide');
   }
