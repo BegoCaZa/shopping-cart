@@ -103,12 +103,16 @@ const PRODUCTS = [
 //ELEMENTOS HTML
 const dessertContainerElement = document.getElementById('desserts-container');
 const buttonsContainer = document.getElementById('filter-buttons');
+const shoppingCartElement = document.getElementById('shopping-cart');
 
 //VARIABLES
 let cart = [];
 let quantity = 0;
 
 //FUNCIONES
+
+// const productSummary = () => {
+//   const productTag = document.createElement('div');
 
 const incrementQuantity = dessert => {
   const existingDessert = defineIfDessertExists(dessert);
@@ -178,6 +182,14 @@ const addToCart = (dessert, buttonAddToCart, buttonActive) => {
 
     const pictureElement = articleCard.children[0].children[3];
     pictureElement.style.border = '3px solid var(--color-primary)'; // borde de color
+  }
+
+  //ocultar el mensaje de carrito vacío
+  const emptyCartElement = document.getElementById('empty-cart');
+  if (cart.length > 0) {
+    emptyCartElement.classList.add('hide');
+  } else {
+    emptyCartElement.classList.remove('hide');
   }
 
   // console.log(cart);
