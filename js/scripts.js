@@ -154,6 +154,9 @@ const removeFromCart = dessert => {
 
   buttonAddToCart.classList.remove('hide');
   buttonActive.classList.add('hide');
+
+  const pictureElement = articleCard.children[0].children[3];
+  pictureElement.style.border = 'none'; // borde de color
 };
 
 const addToCart = (dessert, buttonAddToCart, buttonActive) => {
@@ -172,6 +175,9 @@ const addToCart = (dessert, buttonAddToCart, buttonActive) => {
 
     buttonAddToCart.classList.add('hide');
     buttonActive.classList.remove('hide');
+
+    const pictureElement = articleCard.children[0].children[3];
+    pictureElement.style.border = '3px solid var(--color-primary)'; // borde de color
   }
 
   // console.log(cart);

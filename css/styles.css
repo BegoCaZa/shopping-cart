@@ -161,9 +161,9 @@ body {
   width: 88%;
 }
 
-.product-selected {
+/* .product-selected {
   border: 2px solid var(--color-primary);
-}
+} */
 
 .product-image {
   width: 100%;
@@ -173,6 +173,11 @@ body {
   background-position: center;
   background-repeat: no-repeat;
 }
+
+/* .in-cart {
+  border: var(--color-primary) solid 3px;
+} */
+
 .button-add-to-cart {
   position: absolute;
   content: '';
