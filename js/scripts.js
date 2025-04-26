@@ -104,6 +104,7 @@ const PRODUCTS = [
 const dessertContainerElement = document.getElementById('desserts-container');
 const buttonsContainer = document.getElementById('filter-buttons');
 const shoppingCartElement = document.getElementById('shopping-cart');
+const cartItemsContainer = document.getElementById('cart-items');
 
 //VARIABLES
 let cart = [];
@@ -111,8 +112,106 @@ let quantity = 0;
 
 //FUNCIONES
 
-// const productSummary = () => {
-//   const productTag = document.createElement('div');
+const updateOrderTotal = () => {
+  const orderTotalPrice = document.getElementById('order-total-price'); //como ya existe porque lo cree antes, lo busco por id
+  let newTotal = 0;
+
+  //se va a ir actualizando dependiendo del total del carrito
+  cart.forEach(dessert => {
+    newTotal += dessert.price * dessert.quantity;
+  });
+
+  if (orderTotalPrice) {
+    //si ya existe un total,lo actualizo
+    orderTotalPrice.textContent = `$${newTotal.toFixed(2)}`;
+  }
+};
+
+const updateCart = () => {
+  //ocultar el mensaje de carrito vacío
+  const emptyCartElement = document.getElementById('empty-cart');
+  if (cart.length > 0) {
+    emptyCartElement.classList.add('hide');
+  } else {
+    emptyCartElement.classList.remove('hide');
+  }
+
+  //vaciar el contenedor para no duplicar productos cuando meto uno nuevo
+  cartItemsContainer.textContent = '';
+  //total del carrito
+  let total = 0;
+
+  cart.forEach(dessert => {
+    const productSummary = document.createElement('div');
+    productSummary.classList.add('product-summary');
+
+    const textContainer = document.createElement('div');
+    textContainer.classList.add('product-summary-text-container');
+
+    const title = document.createElement('span');
+    title.classList.add('product-summary-title');
+    title.textContent = dessert.title;
+
+    const priceContainer = document.createElement('div');
+    priceContainer.classList.add('product-summary-prices');
+
+    const quantity = document.createElement('span');
+    quantity.classList.add('product-summary-quantity');
+    quantity.textContent = `${dessert.quantity}x`;
+
+    const unitPrice = document.createElement('span');
+    unitPrice.classList.add('product-summary-price');
+    unitPrice.textContent = `$${dessert.price.toFixed(2)}`;
+
+    const finalPrice = document.createElement('span');
+    finalPrice.classList.add('product-summary-finalPrice');
+    finalPrice.textContent = `$${(dessert.price * dessert.quantity).toFixed(
+      2
+    )}`;
+
+    priceContainer.append(quantity, unitPrice, finalPrice);
+    textContainer.append(title, priceContainer);
+
+    const removeButton = document.createElement('img');
+    removeButton.src = './assets/images/icon-remove-item.svg';
+    removeButton.alt = 'remove item';
+    removeButton.classList.add('remove-item');
+
+    //evento para eliminar el producto del carrito
+    removeButton.addEventListener('click', () => {
+      removeFromCart(dessert); // elimino del array
+      productSummary.remove(); // elimino el div del carrito
+      updateOrderTotal(); // Actualiza el total en otra funcion
+
+      if (cart.length === 0) {
+        emptyCartElement.classList.remove('hide'); // muestra "carrito vacío"
+      }
+    });
+
+    //meto todo al summary
+    productSummary.append(textContainer, removeButton);
+    cartItemsContainer.append(productSummary);
+
+    //actualizo el total sumando el precio de ese producto por la cantidad
+    total += dessert.price * dessert.quantity;
+  });
+
+  //display del total
+  const orderTotalElement = document.createElement('div');
+  orderTotalElement.classList.add('order-total-container');
+
+  const orderTotalText = document.createElement('span');
+  orderTotalText.classList.add('order-total-text');
+  orderTotalText.textContent = 'Total';
+
+  const orderTotalPrice = document.createElement('span');
+  orderTotalPrice.classList.add('order-total-price');
+  orderTotalPrice.id = 'order-total-price'; // le voy a dar este id a la funcion de updatetotal
+  orderTotalPrice.textContent = `$${total.toFixed(2)}`; //este total me lo va a dar la primera vez que meto ese elemento al carrito. para actualizarlo necesitaria otra funcion
+
+  orderTotalElement.append(orderTotalText, orderTotalPrice);
+  cartItemsContainer.append(orderTotalElement);
+};
 
 const incrementQuantity = dessert => {
   const existingDessert = defineIfDessertExists(dessert);
@@ -125,7 +224,7 @@ const incrementQuantity = dessert => {
       quantityTextActive.textContent = existingDessert.quantity; // Actualiza el texto del botón activo
     }
   }
-
+  updateCart(); // Actualiza el carrito
   console.log(cart);
 };
 
@@ -144,6 +243,7 @@ const decrementQuantity = dessert => {
   if (existingDessert.quantity <= 0) {
     removeFromCart(dessert);
   }
+  updateCart(); // Actualiza el carrito
   console.log(cart);
 };
 
@@ -161,6 +261,8 @@ const removeFromCart = dessert => {
 
   const pictureElement = articleCard.children[0].children[3];
   pictureElement.style.border = 'none'; // borde de color
+
+  updateCart(); // Actualiza el carrito
 };
 
 const addToCart = (dessert, buttonAddToCart, buttonActive) => {
@@ -184,13 +286,7 @@ const addToCart = (dessert, buttonAddToCart, buttonActive) => {
     pictureElement.style.border = '3px solid var(--color-primary)'; // borde de color
   }
 
-  //ocultar el mensaje de carrito vacío
-  const emptyCartElement = document.getElementById('empty-cart');
-  if (cart.length > 0) {
-    emptyCartElement.classList.add('hide');
-  } else {
-    emptyCartElement.classList.remove('hide');
-  }
+  updateCart(); // Actualiza el carrito
 
   // console.log(cart);
   // console.log(buttonAddToCart);

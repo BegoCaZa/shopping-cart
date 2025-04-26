@@ -274,7 +274,7 @@ body {
 .shopping-cart {
   background-color: white;
   border-radius: 1.5rem;
-  padding: 32px;
+  padding: 22px;
   max-width: 88%;
   margin: 32px;
   display: flex;
@@ -310,6 +310,14 @@ body {
   color: var(--color-primary);
 }
 
+.cart-items {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+  /* margin-inline: auto; */
+}
+
 .product-summary {
   display: flex;
   flex-direction: row;
@@ -335,6 +343,7 @@ body {
 .product-summary-prices {
   display: flex;
   flex-direction: row;
+  width: 100%;
   gap: 15px;
 }
 
@@ -363,6 +372,22 @@ body {
   align-items: center;
   padding: 3px;
 }
+
+.order-total-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+.order-total-text {
+  font-weight: var(--card-subtitle-style);
+}
+
+.order-total-price {
+  font-weight: var(--card-title-style);
+  font-size: 20px;
+}
+
 .hide {
   display: none;
 }
